@@ -1054,7 +1054,8 @@ class SubstrateTab(object):
             # main_ax.set_ylim([self.ymin, self.ymax])
             plt.xlim(self.xmin, self.xmax)
             plt.ylim(self.ymin, self.ymax)
-
+            if (self.field_index == 4): #tracer
+                    cbar.set_label('mol',size=self.fontsize)
             # if (frame == 0):  # maybe allow substrate grid display later
             #     xs = np.linspace(self.xmin,self.xmax,self.numx)
             #     ys = np.linspace(self.ymin,self.ymax,self.numy)
@@ -1077,7 +1078,16 @@ class SubstrateTab(object):
             self.svg_frame = frame
             # print('plot_svg with frame=',self.svg_frame)
             self.plot_svg(self.svg_frame)
-
+            
+            fname = "output%08d_microenvironment0.mat" % self.substrate_frame
+            full_fname = os.path.join(self.output_dir, fname)
+            if os.path.isfile(full_fname):            
+                x1 = -400
+                x2 = -200
+                y1 = -450
+                y2 = -450
+                plt.plot([x1,x2],[y1,y2], 'k', linewidth = 5)
+                plt.text(-325, -440, u"200 \u03bcm")
         # plt.subplot(grid[2, 0])
         # oxy_ax = self.fig.add_subplot(grid[2:, 0:1])
         #oxy_ax = self.fig.add_subplot(grid[:2, 2:])
