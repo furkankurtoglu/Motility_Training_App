@@ -148,9 +148,11 @@ reset:
 	touch ALL_CITATIONS.txt 
 	rm ALL_CITATIONS.txt 
 	cp ./config/PhysiCell_settings-backup.xml ./config/PhysiCell_settings.xml 
+	touch ./config/empty.csv
+	rm -f ./config/*.csv
 	
 # next 2 targets for nanoHUB
-install: 
+install:
 	. /etc/environ.sh; use -e -r anaconda3-5.1; make all
 	cp $(PROGRAM_NAME) ../bin
 
@@ -166,6 +168,8 @@ clean:
     rm -f $(PROGRAM_NAME).exe
 	
 data-cleanup:
+	rm -rf ./output
+	mkdir ./output
 	rm -f *.mat
 	rm -f *.xml
 	rm -f *.svg
